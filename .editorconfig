@@ -1,0 +1,28 @@
+# Editor config
+root = true
+
+# Make every file use:
+# - linux line endings
+# - No newline at the end
+# - Use spaces for indent style
+[*]
+end_of_line = lf
+insert_final_newline = false
+indent_style = space
+trim_trailing_whitespace = true
+charset = utf-8
+indent_size = 4
+
+# Lua-specific
+[*.lua]
+indent_style = space
+indent_size = 2
+
+# Java-specific
+[*.java]
+indent_style = space
+indent_size = 2
+
+# Bash-specific
+indent_style = space
+indent_size = 2
