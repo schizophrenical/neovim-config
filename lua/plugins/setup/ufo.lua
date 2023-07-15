@@ -15,7 +15,7 @@ require('ufo').setup({
     ---@param str string
     ---@return boolean
     local function is_blank(str)
-      return (str == nil or #string.gsub(str, "^%s*(.-)%s*$", "%1") == 0)
+      return (str == nil or #string.gsub(str, '^%s*(.-)%s*$', '%1') == 0)
     end
 
     ---Test if chunk should be included on the fold text.
@@ -24,9 +24,7 @@ require('ufo').setup({
     ---@return boolean
     local function should_insert(chunk, chunks)
       if is_blank(chunk) then
-        if chunks == 0 then
-          return false
-        end
+        if chunks == 0 then return false end
       end
       return true
     end
@@ -41,7 +39,9 @@ require('ufo').setup({
     local filler_char_star = ' * '
 
     -- folded lines
-    local lines = ('━┫ Lines: %d ┣━' .. filler_char_star .. filler_char):format(endLnum - lnum)
+    local lines = ('━┫ Lines: %d ┣━' .. filler_char_star .. filler_char):format(
+      endLnum - lnum
+    )
 
     -- widths
     local lines_width = vim.fn.strdisplaywidth(lines)
@@ -73,11 +73,15 @@ require('ufo').setup({
         -- track the total width so that we can subtract it
         -- later to the filler_width
         text_width = text_width + text_chunk_width
-        table.insert(virt_text, { text_chunk, "UfoFoldedFg" })
+        table.insert(virt_text, { text_chunk, 'UfoFoldedFg' })
       end
     end
     -- build filler characters to insert at the middle.
-    filler_width = filler_width - pref_width - text_width - suff_width - lines_width
+    filler_width = filler_width
+      - pref_width
+      - text_width
+      - suff_width
+      - lines_width
     local filler = string.rep(filler_char, filler_width)
 
     -- add '┣━' suffix

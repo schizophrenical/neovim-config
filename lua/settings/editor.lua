@@ -44,7 +44,7 @@ opt.ruler = false
 -- set colorcolumn (window local)
 wo.colorcolumn = '100'
 wo.cursorlineopt = 'number'
-opt.fillchars:append { diff = '╱' }
+opt.fillchars:append({ diff = '╱' })
 wo.foldcolumn = 'auto'
 wo.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 opt.foldlevelstart = 99

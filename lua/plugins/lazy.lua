@@ -267,25 +267,25 @@ local plugins = {
           hl.DiagnosticSignError = {
             fg = color.red,
             bg = color.violet2,
-            bold = true
+            bold = true,
           }
           --`DiagnosticSignWarn`
           hl.DiagnosticSignWarn = {
             fg = color.orange,
             bg = color.violet2,
-            bold = true
+            bold = true,
           }
           --`DiagnosticSignInfo`
           hl.DiagnosticSignInfo = {
             fg = color.green,
             bg = color.violet2,
-            bold = true
+            bold = true,
           }
           --`DiagnosticSignHint`
           hl.DiagnosticSignHint = {
             fg = color.green3,
             bg = color.violet2,
-            bold = true
+            bold = true,
           }
         end,
       })
@@ -316,7 +316,7 @@ local plugins = {
     'norcalli/nvim-colorizer.lua',
     lazy = true,
   },
-    -- Smooth scroll (cinnamon)
+  -- Smooth scroll (cinnamon)
   {
     'declancm/cinnamon.nvim',
     config = true,

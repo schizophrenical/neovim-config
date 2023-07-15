@@ -34,21 +34,28 @@ require('telescope').setup({
         '--line-number',
         '--column',
         '--smart-case',
-      }
+      },
     },
     preview = {
       filesize_hook = function(filepath, bufnr, opts)
         local max_bytes = 10000
         local cmd = { 'head', '-c', max_bytes, filepath }
         require('telescope.previewers.utils').job_maker(cmd, bufnr, opts)
-      end
+      end,
     },
     grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     winblend = 0,
     border = {},
     borderchars = {
-      '═', '║', '═', '║', '╔', '╗', '╝', '╚'
+      '═',
+      '║',
+      '═',
+      '║',
+      '╔',
+      '╗',
+      '╝',
+      '╚',
     },
     file_ignore_patterns = {
       'node_modules',
@@ -93,7 +100,7 @@ require('telescope').setup({
     current_buffer_fuzzy_find = {
       -- insert mode on buffer find.
       initial_mode = 'insert',
-    }
+    },
   },
   extensions = {
     recent_files = {
@@ -104,11 +111,11 @@ require('telescope').setup({
       override_file_sorter = true,
     },
     ['ui-select'] = {
-      require('telescope.themes').get_ivy {}
+      require('telescope.themes').get_ivy({}),
     },
     ['dap'] = {
-      require('telescope.themes').get_ivy {}
-    }
+      require('telescope.themes').get_ivy({}),
+    },
   },
 })
 

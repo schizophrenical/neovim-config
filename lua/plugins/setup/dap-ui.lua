@@ -4,10 +4,10 @@ local dap = require('dap')
 local dapui = require('dapui')
 
 require('dapui').setup({
-  icons = { expanded = '', collapsed = "", current_frame = "" },
+  icons = { expanded = '', collapsed = '', current_frame = '' },
   mappings = {
     -- Use a table to apply multiple mappings
-    expand = { '<CR>', "<2-LeftMouse>" },
+    expand = { '<CR>', '<2-LeftMouse>' },
     open = 'o',
     remove = 'd',
     edit = 'e',
@@ -72,14 +72,14 @@ require('dapui').setup({
     max_width = nil, -- Floats will be treated as percentage of your screen.
     border = 'single', -- Border style. Can be "single", "double" or "rounded"
     mappings = {
-      close = { 'q', "<Esc>" },
+      close = { 'q', '<Esc>' },
     },
   },
   windows = { indent = 1 },
   render = {
     max_type_length = nil, -- Can be integer or nil.
     max_value_lines = 100, -- Can be integer or nil.
-  }
+  },
 })
 
 dap.listeners.after.event_initialized['dapui_config'] = function()

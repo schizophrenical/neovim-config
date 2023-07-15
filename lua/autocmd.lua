@@ -139,9 +139,7 @@ cmd('LspDetach', {
   group = lsp,
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client then
-      vim.cmd("setlocal tagfunc< omnifunc<")
-    end
-  end
+    if client then vim.cmd('setlocal tagfunc< omnifunc<') end
+  end,
 })
 ---------------------------------------------------------------------------------------------------

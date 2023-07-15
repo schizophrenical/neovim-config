@@ -31,16 +31,16 @@ require('statuscol').setup({
           args.fold.close = ''
           args.fold.sep = '┆'
           return builtin.foldfunc(args)
-        end
+        end,
       },
       hl = 'CmpItemKindUnit',
       click = 'v:lua.ScFa',
-      auto = true
+      auto = true,
     },
     -- Separator
     {
       text = { ' ' },
-      hl = "SignColumn",
+      hl = 'SignColumn',
       maxwidth = 1,
       colwidth = 1,
     },
@@ -66,13 +66,13 @@ require('statuscol').setup({
         -- prevent flickering due to removing/applying the diagnostic column
         auto = false,
       },
-      click = 'v:lua.ScSa'
+      click = 'v:lua.ScSa',
     },
     -- Line numbers
     {
       text = { builtin.lnumfunc, ' ' },
       condition = { true, builtin.not_empty },
-      click = "v:lua.ScLa",
+      click = 'v:lua.ScLa',
     },
     -- Git signs
     {
@@ -84,7 +84,7 @@ require('statuscol').setup({
         fillchar = '│',
         fillcharhl = 'WhichKeySeparator',
       },
-      click = "v:lua.ScSa",
+      click = 'v:lua.ScSa',
     },
   },
 })

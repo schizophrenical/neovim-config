@@ -3,12 +3,12 @@
 require('gitsigns').setup({
   signcolumn = true,
   signs = {
-    add          = { text = '┃' },
-    change       = { text = '┃' },
-    delete       = { text = '╍' },
-    topdelete    = { text = '━' },
+    add = { text = '┃' },
+    change = { text = '┃' },
+    delete = { text = '╍' },
+    topdelete = { text = '━' },
     changedelete = { text = '╼' },
-    untracked    = { text = '' },
+    untracked = { text = '' },
   },
   current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {

@@ -20,7 +20,10 @@ cmp.setup({
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, vim_item)
-      local kind = lspkind.cmp_format({ mode = 'symbol_text', maxwidth = 50 })(entry, vim_item)
+      local kind = lspkind.cmp_format({ mode = 'symbol_text', maxwidth = 50 })(
+        entry,
+        vim_item
+      )
       local strings = vim.split(kind.kind, '%s', { trimempty = true })
       kind.kind = ' ' .. strings[1] .. ' '
       kind.menu = '    (' .. strings[2] .. ')'
@@ -33,7 +36,7 @@ cmp.setup({
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
-      require 'cmp-under-comparator'.under,
+      require('cmp-under-comparator').under,
       cmp.config.compare.kind,
       cmp.config.compare.sort_text,
       cmp.config.compare.length,
@@ -52,7 +55,15 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_next_item()
       elseif require('luasnip').expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+        vim.fn.feedkeys(
+          vim.api.nvim_replace_termcodes(
+            '<Plug>luasnip-expand-or-jump',
+            true,
+            true,
+            true
+          ),
+          ''
+        )
       else
         fallback()
       end
@@ -64,7 +75,15 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       elseif require('luasnip').jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+        vim.fn.feedkeys(
+          vim.api.nvim_replace_termcodes(
+            '<Plug>luasnip-jump-prev',
+            true,
+            true,
+            true
+          ),
+          ''
+        )
       else
         fallback()
       end
@@ -98,7 +117,7 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline_history' },
     { name = 'cmdline' },
     { name = 'path' },
-  }
+  },
 })
 
 -- Search mode
@@ -108,18 +127,15 @@ cmp.setup.cmdline({ '/', '?' }, {
     { name = 'cmdline_history' },
     { name = 'nvim_lsp_document_symbol' },
     { name = 'path' },
-  }, {
+  },
+  {
     { name = 'buffer' },
-  }
+  },
 })
 
 -- autopairs
-cmp.event:on(
-  'confirm_done',
-  autopair.on_confirm_done()
-)
+cmp.event:on('confirm_done', autopair.on_confirm_done())
 
 -- Some generators.
 -- luasnip config
 require('luasnip.loaders.from_vscode').lazy_load()
-

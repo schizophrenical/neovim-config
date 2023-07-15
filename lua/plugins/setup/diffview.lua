@@ -18,5 +18,5 @@ require('diffview').setup({
     file_panel = {
       width = 45,
     },
-  }
+  },
 })

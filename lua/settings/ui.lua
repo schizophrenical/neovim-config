@@ -55,7 +55,7 @@ vim.diagnostic.config({
     --severity = vim.diagnostic.severity.ERROR,
     underline = true,
     source = 'if_many',
-    prefix = ' '
+    prefix = ' ',
   },
   signs = true,
   update_in_insert = false,

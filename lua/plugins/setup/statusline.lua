@@ -27,7 +27,7 @@ local colors = {
   git = {
     add = '#43AA8B',
     remove = '#CC6666',
-  }
+  },
 }
 
 local theme = {
@@ -114,18 +114,20 @@ end
 
 local git_stat = { ahead = 0, behind = 0 }
 local function update_git_stat()
-  local Job = require 'plenary.job'
+  local Job = require('plenary.job')
   Job:new({
     command = 'git',
     args = { 'rev-list', '--left-right', '--count', 'HEAD...@{upstream}' },
     on_exit = function(job, _)
       local res = job:result()[1]
       if type(res) ~= 'string' then
-        git_stat = { ahead = 0, behind = 0 };
+        git_stat = { ahead = 0, behind = 0 }
         return
       end
-      local ok, ahead, behind = pcall(string.match, res, "(%d+)%s*(%d+)")
-      if not ok then ahead, behind = 0, 0 end
+      local ok, ahead, behind = pcall(string.match, res, '(%d+)%s*(%d+)')
+      if not ok then
+        ahead, behind = 0, 0
+      end
       git_stat = { ahead = ahead, behind = behind }
     end,
   }):start()
@@ -138,18 +140,18 @@ else
 end
 _G.Gstatus_timer:start(0, 2000, vim.schedule_wrap(update_git_stat))
 
-ins_left {
+ins_left({
   function()
     return '▊'
   end,
   -- Sets highlighting of component
   color = {
-    fg = colors.blue
+    fg = colors.blue,
   },
   padding = { left = 0, right = 1 },
-}
+})
 
-ins_left {
+ins_left({
   -- mode component
   'mode',
   color = function()
@@ -181,32 +183,32 @@ ins_left {
     }
   end,
   padding = { right = 1 },
-}
+})
 
 -- filetype
-ins_left {
+ins_left({
   'filetype',
   colored = true,
   icon_only = true,
   padding = { right = 1 },
   cond = conditions.buffer_not_empty,
-}
+})
 
 -- filename
 -- relative path with filename
 -- finame will have a different color
-ins_left {
-  function ()
-    return vim.fn.fnamemodify(vim.fn.expand('%'), ':p:.:h') ..'/'
+ins_left({
+  function()
+    return vim.fn.fnamemodify(vim.fn.expand('%'), ':p:.:h') .. '/'
   end,
   color = {
     fg = colors.grey2,
   },
   padding = { right = 0 },
   cond = conditions.buffer_not_empty,
-}
+})
 
-ins_left {
+ins_left({
   'filename',
   file_status = true,
   new_file_status = true,
@@ -222,15 +224,15 @@ ins_left {
   },
   padding = { right = 1 },
   cond = conditions.buffer_not_empty,
-}
+})
 
 -- diff
-ins_left {
+ins_left({
   'diff',
   symbols = {
     added = ' ',
     modified = ' ',
-    removed = ' '
+    removed = ' ',
   },
   diff_color = {
     added = { fg = colors.git.add },
@@ -238,41 +240,41 @@ ins_left {
     removed = { fg = colors.git.remove },
   },
   cond = conditions.check_git_workspace,
-}
+})
 
 -- diagnostics
-ins_right {
+ins_right({
   'diagnostics',
   sources = { 'nvim_diagnostic' },
   symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
   colored = true,
   always_visibile = true,
   padding = { left = 1 },
-  cond = conditions.hide_in_width
-}
+  cond = conditions.hide_in_width,
+})
 
 -- location (line:col)
-ins_right {
+ins_right({
   'location',
   padding = { left = 1 },
   color = {
     fg = colors.grey2,
   },
   cond = conditions.hide_in_width,
-}
+})
 
 -- progress
-ins_right {
+ins_right({
   'progress',
   color = {
     fg = colors.grey2,
   },
   padding = { left = 1 },
   cond = conditions.hide_in_width,
-}
+})
 
 -- Spaces/Tabs plus size
-ins_right {
+ins_right({
   function()
     local bufopt = vim.api.nvim_buf_get_option
     local width = bufopt(0, 'tabstop')
@@ -287,15 +289,16 @@ ins_right {
   end,
   color = function()
     return {
-      fg = vim.api.nvim_buf_get_option(0, 'expandtab') and colors.blue or colors.red2,
+      fg = vim.api.nvim_buf_get_option(0, 'expandtab') and colors.blue
+        or colors.red2,
     }
   end,
   padding = { left = 1 },
-  cond = conditions.hide_in_width
-}
+  cond = conditions.hide_in_width,
+})
 
 -- File format (line endings)
-ins_right {
+ins_right({
   'fileformat',
   symbols = {
     unix = '󰌽 ', -- e712
@@ -306,11 +309,11 @@ ins_right {
   color = {
     fg = colors.green,
   },
-  cond = conditions.hide_in_width
-}
+  cond = conditions.hide_in_width,
+})
 
 -- File encoding
-ins_right {
+ins_right({
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper,
   padding = { left = 0 },
@@ -318,10 +321,10 @@ ins_right {
     fg = colors.green,
   },
   cond = conditions.hide_in_width,
-}
+})
 
 -- Buffer count
-ins_right {
+ins_right({
   function()
     local len = vim.fn.len
     local bufinfo = vim.fn.getbufinfo
@@ -333,18 +336,16 @@ ins_right {
   },
   padding = { left = 1 },
   cond = conditions.hide_in_width,
-}
+})
 
 -- Lsp server name.
-ins_right {
+ins_right({
   function()
     local nolsp = ' No LSP'
     local lsp = ' '
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
     local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return nolsp
-    end
+    if next(clients) == nil then return nolsp end
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
@@ -357,11 +358,11 @@ ins_right {
     fg = colors.orange,
   },
   padding = { left = 1 },
-  cond = conditions.hide_in_width
-}
+  cond = conditions.hide_in_width,
+})
 
 -- git branch
-ins_right {
+ins_right({
   'branch',
   icon = '',
   fmt = function(str)
@@ -372,20 +373,19 @@ ins_right {
     fg = colors.green3,
   },
   padding = { left = 1 },
-  cond = conditions.check_git_workspace
-}
+  cond = conditions.check_git_workspace,
+})
 
-ins_right {
+ins_right({
   function()
     return '▊'
   end,
   -- Sets highlighting of component
   color = {
-    fg = colors.blue
+    fg = colors.blue,
   },
   padding = { left = 1, right = 0 },
-}
+})
 
 -- setup lualine
 lualine.setup(config)
-

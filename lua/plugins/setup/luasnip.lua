@@ -11,10 +11,11 @@ config.set_config({
       active = {
         virt_text = {
           {
-            '', 'DiagnosticHint'
-          }
-        }
-      }
-    }
-  }
+            '',
+            'DiagnosticHint',
+          },
+        },
+      },
+    },
+  },
 })

@@ -8,5 +8,5 @@ require('indent_blankline').setup({
   space_char_blankline = ' ',
   char = '¦',
   char_blank_line = ' ',
-  context_char_list = {'¦'},
+  context_char_list = { '¦' },
 })

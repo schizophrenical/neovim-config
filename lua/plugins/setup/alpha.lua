@@ -83,28 +83,34 @@ local headers = {
 --- @param keybind string? optional
 --- @param keybind_opts table? optional
 local function button(sc, txt, keybind, keybind_opts)
-  local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+  local sc_ = sc:gsub('%s', ''):gsub(leader, '<leader>')
 
   local opts = {
-    position = "center",
+    position = 'center',
     shortcut = sc,
     cursor = 5,
     width = 50,
-    align_shortcut = "right",
-    hl_shortcut = "Constant",
+    align_shortcut = 'right',
+    hl_shortcut = 'Constant',
   }
   if keybind then
-    keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-    opts.keymap = { "n", sc_, keybind, keybind_opts }
+    keybind_opts =
+      if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+    opts.keymap = { 'n', sc_, keybind, keybind_opts }
   end
 
   local function on_press()
-    local key = vim.api.nvim_replace_termcodes(keybind or sc_ .. "<Ignore>", true, false, true)
-    vim.api.nvim_feedkeys(key, "t", false)
+    local key = vim.api.nvim_replace_termcodes(
+      keybind or sc_ .. '<Ignore>',
+      true,
+      false,
+      true
+    )
+    vim.api.nvim_feedkeys(key, 't', false)
   end
 
   return {
-    type = "button",
+    type = 'button',
     val = txt,
     on_press = on_press,
     opts = opts,
@@ -113,11 +119,11 @@ end
 
 --- Header
 local header = {
-  type = "text",
+  type = 'text',
   val = headers.kraken,
   opts = {
-    position = "center",
-    hl = "Special",
+    position = 'center',
+    hl = 'Special',
   },
 }
 
@@ -126,11 +132,31 @@ local buttons = {
   type = 'group',
   val = {
     button('e', '  New File', '<CMD>ene <CR>'),
-    button('f', '  Find File', "<CMD>lua require('telescope.builtin').find_files()<CR>"),
-    button('h', '  Find Recents', "<CMD>lua require('telescope').extensions.recent_files.pick()<CR>"),
-    button('c', '  Config File', '<CMD>e ' .. config_path .. '/init.lua <CR>'),
-    button('k', '  Keymap File', '<CMD>e ' .. config_path .. '/lua/keymaps.lua <CR>'),
-    button('v', '  Plugins File', '<CMD>e ' .. config_path .. '/lua/plugins/lazy.lua <CR>'),
+    button(
+      'f',
+      '  Find File',
+      "<CMD>lua require('telescope.builtin').find_files()<CR>"
+    ),
+    button(
+      'h',
+      '  Find Recents',
+      "<CMD>lua require('telescope').extensions.recent_files.pick()<CR>"
+    ),
+    button(
+      'c',
+      '  Config File',
+      '<CMD>e ' .. config_path .. '/init.lua <CR>'
+    ),
+    button(
+      'k',
+      '  Keymap File',
+      '<CMD>e ' .. config_path .. '/lua/keymaps.lua <CR>'
+    ),
+    button(
+      'v',
+      '  Plugins File',
+      '<CMD>e ' .. config_path .. '/lua/plugins/lazy.lua <CR>'
+    ),
     button('t', '  Check Health', '<CMD>silent checkhealth<CR>'),
     button(',', '  Sync Plugins', '<CMD>Lazy sync<CR>'),
     button('.', '  Mason Packages', '<CMD>Mason<CR>'),
@@ -148,7 +174,7 @@ local footer = {
   val = '',
   opts = {
     position = 'center',
-    hl = 'Type'
+    hl = 'Type',
   },
 }
 
@@ -166,5 +192,5 @@ require('alpha').setup({
     section.buttons,
     { type = 'padding', val = 3 },
     section.footer,
-  }
+  },
 })

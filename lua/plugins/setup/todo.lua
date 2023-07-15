@@ -11,15 +11,15 @@ require('todo-comments').setup({
         'BUG',
         'FIXIT',
         'ISSUE',
-        'ERROR'
+        'ERROR',
       },
     },
     TODO = {
-      color = '#F4A64E'
+      color = '#F4A64E',
     },
   },
   highlight = {
     keyword = 'bg',
     pattern = [[.*<(KEYWORDS)[^:]*:]],
-  }
+  },
 })

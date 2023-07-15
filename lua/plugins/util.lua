@@ -10,7 +10,8 @@ _G.plugin_opts = {}
 local function init_opts_files()
   -- WARN: Make sure to update the path in case of config refactoring.
   if vim.tbl_isempty(_G.plugin_opts) then
-    local opts_dir = vim.fn.glob(vim.fn.stdpath('config') .. '/lua/plugins/setup/*.lua')
+    local opts_dir =
+      vim.fn.glob(vim.fn.stdpath('config') .. '/lua/plugins/setup/*.lua')
     for _, p in pairs(vim.fn.split(opts_dir, '\n')) do
       _G.plugin_opts[vim.fn.fnamemodify(p, ':t:r')] = true
     end
@@ -23,7 +24,7 @@ end
 ---@param hl string message highlight.
 local function log(plugin, type, hl)
   vim.api.nvim_echo({
-    { 'No ' .. type .. ' file found for ' .. plugin, hl }
+    { 'No ' .. type .. ' file found for ' .. plugin, hl },
   }, false, {})
 end
 

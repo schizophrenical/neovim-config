@@ -1,3 +1,3 @@
 require('cmp-plugins').setup({
-  files = { '.*\\.lua' }
+  files = { '.*\\.lua' },
 })
