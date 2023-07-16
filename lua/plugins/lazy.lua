@@ -316,9 +316,15 @@ local plugins = {
     'norcalli/nvim-colorizer.lua',
     lazy = true,
   },
-  -- Smooth scroll (cinnamon)
+  ---Smooth scroll (cinnamon)
   {
     'declancm/cinnamon.nvim',
+    config = true,
+  },
+  ---Search highlights
+  {
+    'kevinhwang91/nvim-hlslens',
+    lazy = true,
     config = true,
   },
   ---Greeter (alpha)
