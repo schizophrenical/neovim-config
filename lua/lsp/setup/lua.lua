@@ -2,12 +2,12 @@
 
 -- Lua LSP config
 local conf = require('lsp.conf')
-local lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 
 -- Neodev
 require('neodev').setup({})
 
-lsp.lua_ls.setup({
+lspconfig.lua_ls.setup({
   -- root dir is found via the .stylua.toml file.
   flags = conf.flags,
   capabilities = conf.capabilities,
