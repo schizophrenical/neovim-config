@@ -35,7 +35,7 @@ local lsp_conf = {
   },
   -- log/message handlers
   handlers = {
-    ['language/status'] = conf.status_update_handler,
+    ['language/status'] = java_conf.status_update_handler,
     -- progress adds slowness (to me)
     ['$/progress'] = function() end,
   },
