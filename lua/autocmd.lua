@@ -127,11 +127,17 @@ cmd('LspAttach', {
       if client.server_capabilities.definitionProvider then
         vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
       end
+      if ft == 'java' then
+        -- Disable semantic tokens for Java
+        client.server_capabilities.semanticTokenProvider = nil
+        local dap_overrides = require('lsp.conf').java.dap_overrides
+        require('jdtls').setup_dap(dap_overrides)
+      end
     end
     -- register language specific keymaps
     require('lsp.keymaps').register_keymaps(ft)
     -- enable inlay hints
-    vim.lsp.inlay_hint(bufnr, true)
+    if not ft == 'java' then vim.lsp.inlay_hint(bufnr, true) end
   end,
 })
 
