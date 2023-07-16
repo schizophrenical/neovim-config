@@ -12,14 +12,14 @@ whichkey.register({
     -- Writing/saving file(s)
     w = {
       name = 'Save ...',
-      w = { '<CMD>silent :FormatWriteLock<CR>', 'Save File' },
-      a = { '<CMD>silent wa<CR>', 'Save All Files' },
+      w = { '<CMD>silent w<CR>', 'Save File' },
+      a = { '<CMD>silent wall<CR>', 'Save All Files' },
     },
     -- Exit nvim (yeah, we FINALLY know how to do it)
     q = {
       name = 'Quit ...',
-      q = { '<CMD>silent q!<CR>', 'Quit w/o Saving' },
-      X = { '<CMD>silent q<CR>', 'Quit Neovim :(' },
+      q = { '<CMD>silent q<CR>', 'Quit Neovim :(' },
+      X = { '<CMD>silent q!<CR>', 'Quit w/o Saving' },
     },
     -- File Browsing (Global)
     f = {
