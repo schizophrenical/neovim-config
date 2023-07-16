@@ -66,6 +66,8 @@ require('nvim-tree').setup({
       'README.md',
       'readme.md',
       'lazy-lock.json',
+      '.editorconfig',
+      '.stylua.toml',
     },
     symlink_destination = true,
     highlight_opened_files = 'all',
