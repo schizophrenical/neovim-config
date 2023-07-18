@@ -3,7 +3,7 @@
 ---Mainly LSP settings and some buffer options.
 
 local conf = require('lsp.conf')
-local java_conf = conf.java
+local java_conf = require('lsp.setup.java')
 local jdtls = require('jdtls')
 
 ---LSP config (JDTLS)
