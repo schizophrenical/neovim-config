@@ -3,7 +3,7 @@
 --- Initializes the package manager
 
 -- Currently in-use: Lazy
-local lazy = require('plugins.lazy')
+local lazy = require('plugins.manager.lazy')
 
 local M = {}
 
