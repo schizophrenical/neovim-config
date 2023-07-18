@@ -97,6 +97,12 @@ local lsp_conf = {
       contentProvider = {
         preferred = 'fernflower',
       },
+      -- Inlay hint
+      inlayhints = {
+        parameterNames = {
+          enabled = 'all',
+        },
+      },
       -- Enable folding range.
       foldingRange = {
         enabled = true,

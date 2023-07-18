@@ -1,20 +1,7 @@
---- Lua LSP Server
+--- Lua LSP Config
 
--- Lua LSP config
-local conf = require('lsp.conf')
-local lspconfig = require('lspconfig')
-
--- Neodev
-require('neodev').setup({})
-
-lspconfig.lua_ls.setup({
-  -- root dir is found via the .stylua.toml file.
-  flags = conf.flags,
-  capabilities = conf.capabilities,
+return {
   cmd = { 'lua-language-server' },
-  handlers = {
-    ['$/progress'] = conf.progress_handler,
-  },
   settings = {
     Lua = {
       runtime = {
@@ -45,4 +32,4 @@ lspconfig.lua_ls.setup({
       },
     },
   },
-})
+}

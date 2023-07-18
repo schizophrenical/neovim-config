@@ -1,17 +1,7 @@
---- YAML LSP Setup
+--- YAML LSP Config
 
-local conf = require('lsp.conf')
-local lspconfig = require('lspconfig')
-local util = lspconfig.util
-
-lspconfig.yamlls.setup({
-  flags = conf.flags,
-  capabilities = conf.capabilities,
+return {
   cmd = { 'yaml-language-server', '--stdio' },
-  root_dir = util.find_git_ancestor,
-  handlers = {
-    ['$/progress'] = conf.progress_handler,
-  },
   single_file_support = true,
   settings = {
     schemasStrore = {
@@ -24,4 +14,4 @@ lspconfig.yamlls.setup({
       },
     },
   },
-})
+}
