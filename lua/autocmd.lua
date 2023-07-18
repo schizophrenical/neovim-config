@@ -5,6 +5,47 @@ local cmd = vim.api.nvim_create_autocmd
 local prefix = '_mine.'
 
 ---------------------------------------------------------------------------------------------------
+-- LSP Attach and detach
+---------------------------------------------------------------------------------------------------
+local lsp = group(prefix .. 'lsppp', { clear = true })
+
+cmd('LspAttach', {
+  group = lsp,
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local ft = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+    if client then
+      if client.server_capabilities.completionProvider then
+        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+      end
+      if client.server_capabilities.definitionProvider then
+        vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
+      end
+      if ft == 'java' then
+        -- Disable semantic tokens for Java
+        client.server_capabilities.semanticTokenProvider = nil
+        local dap_overrides = require('lsp.setup.java').dap_overrides
+        require('jdtls').setup_dap(dap_overrides)
+      end
+    end
+    -- register language specific keymaps
+    require('lsp.keymaps').register_keymaps(ft)
+    -- enable inlay hints
+    if not ft == 'java' then vim.lsp.inlay_hint(bufnr, true) end
+  end,
+})
+
+cmd('LspDetach', {
+  group = lsp,
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client then vim.cmd('setlocal tagfunc< omnifunc<') end
+  end,
+})
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
 -- Terminal autocmd
 ---------------------------------------------------------------------------------------------------
 local term = group(prefix .. 'Terminal', { clear = true })
@@ -105,47 +146,6 @@ cmd('BufEnter', {
   group = vertical_help,
   callback = function()
     if vim.o.filetype == 'help' then vim.cmd.wincmd('L') end
-  end,
-})
----------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------
--- LSP Attach and detach
----------------------------------------------------------------------------------------------------
-local lsp = group(prefix .. 'lsppp', { clear = true })
-
-cmd('LspAttach', {
-  group = lsp,
-  callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local ft = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-    if client then
-      if client.server_capabilities.completionProvider then
-        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-      end
-      if client.server_capabilities.definitionProvider then
-        vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
-      end
-      if ft == 'java' then
-        -- Disable semantic tokens for Java
-        client.server_capabilities.semanticTokenProvider = nil
-        local dap_overrides = require('lsp.conf').java.dap_overrides
-        require('jdtls').setup_dap(dap_overrides)
-      end
-    end
-    -- register language specific keymaps
-    require('lsp.keymaps').register_keymaps(ft)
-    -- enable inlay hints
-    if not ft == 'java' then vim.lsp.inlay_hint(bufnr, true) end
-  end,
-})
-
-cmd('LspDetach', {
-  group = lsp,
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client then vim.cmd('setlocal tagfunc< omnifunc<') end
   end,
 })
 ---------------------------------------------------------------------------------------------------
