@@ -214,7 +214,7 @@ local buttons = {
     button(
       'v',
       '  Plugins File',
-      '<CMD>e ' .. config_path .. '/lua/plugins/lazy.lua <CR>'
+      '<CMD>e ' .. config_path .. '/lua/plugins/manager/lazy.lua <CR>'
     ),
     button('t', '  Check Health', '<CMD>silent checkhealth<CR>'),
     button(',', '  Sync Plugins', '<CMD>Lazy sync<CR>'),
