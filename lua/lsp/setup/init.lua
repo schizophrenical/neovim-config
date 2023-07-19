@@ -38,4 +38,8 @@ lspconfig.jsonls.setup(merge_conf(base_conf, json))
 -- YAML
 local yaml = require('lsp.setup.yaml')
 lspconfig.yamlls.setup(merge_conf(base_conf, yaml))
+
+-- Bash
+local bash = require('lsp.setup.bash')
+lspconfig.bashls.setup(merge_conf(base_conf, bash))
 ---------------------------------------------------------------------------------------------------
