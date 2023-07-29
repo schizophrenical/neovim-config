@@ -2,11 +2,11 @@
 
 return {
   cmd = { 'bash-language-server', 'start' },
-  filetypes = { 'sh' },
+  filetypes = { 'sh', 'zsh' },
   single_file_support = true,
   settings = {
     bashIde = {
-      globPattern = '*@(.sh|.inc|.bash|.command)',
+      globPattern = '*@(.sh|.inc|.bash|.command|.zsh)',
     },
   },
 }
