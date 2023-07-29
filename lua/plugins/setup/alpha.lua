@@ -198,7 +198,7 @@ local buttons = {
     ),
     button(
       'h',
-      '  Find Recents',
+      '  Find Recents',
       "<CMD>lua require('telescope').extensions.recent_files.pick()<CR>"
     ),
     button(
@@ -219,7 +219,7 @@ local buttons = {
     button('t', '  Check Health', '<CMD>silent checkhealth<CR>'),
     button(',', '  Sync Plugins', '<CMD>Lazy sync<CR>'),
     button('.', '  Mason Packages', '<CMD>Mason<CR>'),
-    button('q', '  Quit Neovim', '<CMD>q <CR>'),
+    button('q', '󰅚  Quit Neovim', '<CMD>q <CR>'),
   },
   opts = {
     spacing = 1,
